@@ -1,6 +1,6 @@
 <template>
   <section class="home-view">
-    <div class="container">
+    <div class="container mb-8">
       <p>Etapa <span class="text-primary">{{ step_index }}</span> de {{ step_count }}</p>
       <component 
         :is="form_components[step_index]" 
@@ -9,6 +9,7 @@
         @next="next"
       />
     </div>
+    {{ state }}
   </section>
 </template>
 <script setup>

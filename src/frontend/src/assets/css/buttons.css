@@ -20,6 +20,8 @@
   }
   &:disabled {
     cursor: not-allowed;
+    background-color: gray;
+    color: black;
   }
 }
 
@@ -27,4 +29,14 @@
   background-color: var(--primary);
   border-color: var(--primary);
   color: var(--white);
+}
+
+.btn-outline-primary {
+  background-color: transparent;
+  border-color: var(--primary);
+  color: var(--primary);
+
+  &:hover {
+    background-color: var(--primary);
+  }
 }

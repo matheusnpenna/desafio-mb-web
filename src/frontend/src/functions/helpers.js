@@ -26,6 +26,14 @@ export const removeMask = maskedValue => {
     .trim();
 };
 
+export const isValidEmail = email => {
+  if (!email.match(/^[\+_a-z0-9-'&=]+(\.[\+_a-z0-9-']+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i)) {
+    return false;
+  }
+  
+  return true;
+}
+
 export function isValidCPF(cpf) {
   if (cpf.length !== 11 || !!cpf.match(/(\d)\1{10}/)) return false;
   cpf = cpf.split("");
@@ -84,37 +92,34 @@ export function isValidCNPJ(cnpj) {
 export const formatCnpjCpf = value => {
   if (!value && value == "-") return "-";
 
-  const cnpjCpf = value.replace(/\D/g, "");
+  const document = value.replace(/\D/g, "");
 
-  if (cnpjCpf.length === 11) {
-    return cnpjCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
+  if (document.length === 11) {
+    return document
+      .replace(/\D/g, "")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{1,2})/, "$1-$2")
+      .replace(/(-\d{2})\d+?$/, "$1");
   }
 
-  return cnpjCpf.replace(
+  return document.replace(
     /(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g,
     "$1.$2.$3/$4-$5"
   );
 };
 
-export const formatPhone = number => {
-  if (!number && number == "-") return "-";
+export const formatPhone = n => `${n}`
+  .replace(/\D/g, "")
+  .replace(/(\d{2})(\d)/, "($1) $2")
+  .replace(/(\d{5})(\d)/, "$1-$2")
+  .replace(/(-\d{4})(\d+?)$/, "$1");
 
-  // for pattern: +5599999999999
-  const cleaned = ("" + number).replace(/\D/g, "");
-  // for pattern: 5599999999999
-  const match = cleaned.match(/^(\d{2})(\d{2})(\d{4}|\d{5})(\d{4})$/);
-  // for pattern: 55 99 99999 9999
-  if (match) 
-    return ["(", match[2], ")", match[3], "-", match[4]].join("");
-  
-  // for pattern: (99) 99999-9999
-  return "";
-};
 
-export const isValidEmail = email => {
-  if (!email.match(/^[\+_a-z0-9-'&=]+(\.[\+_a-z0-9-']+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i)) {
-    return false;
-  }
-  
-  return true;
+export const formatDate = val => {
+  return `${val}`
+    .replace(/\D/g, "")
+    .replace(/(\d{2})(\d)/, "$1/$2")
+    .replace(/(\d{2})(\d)/, "$1/$2")
+    .replace(/(\d{4})(\d)/, "$1");
 }
