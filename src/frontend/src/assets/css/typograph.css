@@ -7,7 +7,3 @@ p {
   font-size: 14px;
   font-weight: normal;
 }
-
-.text-primary {
-  color: var(--primary);
-}

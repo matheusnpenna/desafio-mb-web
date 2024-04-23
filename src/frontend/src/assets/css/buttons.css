@@ -18,6 +18,9 @@
   &:hover {
     opacity: .9;
   }
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 .btn-primary {

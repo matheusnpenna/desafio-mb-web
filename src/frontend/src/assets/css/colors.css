@@ -1,0 +1,11 @@
+.text-primary {
+  color: var(--primary);
+}
+
+.text-danger {
+  color: var(--danger);
+}
+
+.border-danger {
+  border: 1px solid var(--danger);
+}

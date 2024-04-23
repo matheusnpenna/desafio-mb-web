@@ -4,7 +4,7 @@
       <p>Etapa <span class="text-primary">{{ step_index }}</span> de {{ step_count }}</p>
       <component 
         :is="form_components[step_index]" 
-        v-model="form"
+        v-model="state.form"
         @prev="prev" 
         @next="next"
       />
@@ -12,7 +12,7 @@
   </section>
 </template>
 <script setup>
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import FormLegalPerson from '@/components/forms/FormLegalPerson.vue';
 import FormNaturalPerson from '@/components/forms/FormNaturalPerson.vue';
 import FormPassword from '@/components/forms/FormPassword.vue';
@@ -21,16 +21,7 @@ import FormReview from '@/components/forms/FormReview.vue';
 
 import { formFields } from "@/functions/helpers";
 
-
-const form_components = {
-  1: FormWelcome,
-  2: FormLegalPerson,
-  3: FormNaturalPerson,
-  4: FormPassword,
-  5: FormReview
-};
-
-const form = reactive(formFields([
+const state = reactive(formFields([
   "name",
   "email",
   "legal_nature",
@@ -41,9 +32,16 @@ const form = reactive(formFields([
   "password",
 ]));
 
+const form_components = computed(() => ({
+  1: FormWelcome,
+  2: state.form.legal_nature == 'natural' ? FormNaturalPerson : FormLegalPerson,
+  3: FormPassword,
+  4: FormReview
+}));
+
 const step_index = ref(1);
 
-const step_count = Object.keys(form_components).length;
+const step_count = Object.keys(form_components.value).length;
 
 const next = () => { 
   if (step_index.value < step_count - 1) {
@@ -55,8 +53,8 @@ const prev = () => {
     step_index.value -= 1 
   }
 };
-</script>
 
-<style scoped>
-.home-view {}
-</style>
+const submit = () => {
+
+}
+</script>

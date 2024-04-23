@@ -110,3 +110,11 @@ export const formatPhone = number => {
   // for pattern: (99) 99999-9999
   return "";
 };
+
+export const isValidEmail = email => {
+  if (!email.match(/^[\+_a-z0-9-'&=]+(\.[\+_a-z0-9-']+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i)) {
+    return false;
+  }
+  
+  return true;
+}
