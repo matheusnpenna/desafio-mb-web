@@ -1,12 +1,12 @@
 <template>
   <form class="form-welcome-component" @submit.prevent="onNext">
     <h1 class="mb-4">
-      Pessoa {{ person_info.type }}
+      Pessoa {{ config.type }}
     </h1>
 
     <FormInput
       id="name"
-      :label="person_info.name_label"
+      :label="config.name_label"
       v-model="form.name"
       :error="errors.name"
       class="mb-4"
@@ -14,17 +14,17 @@
 
     <FormInput
       id="cpf"
-      :label="person_info.document"
+      :label="config.document"
       v-model="form.document"
       :error="errors.document"
       transform="document"
       class="mb-4"
-      :max-length="11"
+      :max-length="config.document_max_length"
     />
 
     <FormInput
       id="birth_date"
-      :label="person_info.date_label"
+      :label="config.date_label"
       transform="date"
       v-model="form.birth_date"
       :error="errors.birth_date"
@@ -49,20 +49,19 @@
         class="mr-8"
         @click="$emit('prev')"
       >
-        Cancelar
+        Voltar
       </FormButton>
-      <FormButton 
-        type="submit"
-        :disabled="!is_valid_fields"
-      >
+      <FormButton  type="submit">
         Continuar
       </FormButton>
     </div>
   </form>
 </template>
 <script setup>
-import { formFields, isValidCPF, removeMask } from '@/functions/helpers';
-import { computed, reactive, watch } from 'vue';
+import { usePersonComponentConfig } from '@/composables/person';
+import { useForm } from '@/composables/form';
+import { watch } from 'vue';
+import { useValidator } from '@/composables/validate';
 
 const props = defineProps({
   modelValue: {
@@ -71,28 +70,16 @@ const props = defineProps({
   }
 });
 
-const person_info = computed(() => 
-  props.modelValue.legal_nature == "natural" ? 
-  {
-    type: "Física",
-    document: "CPF",
-    name_label: "Nome",
-    date_label: "Data de nascimento"
-  } : 
-  {
-    type: "Jurídica",
-    document: "CNPJ",
-    name_label: "Razão Social",
-    date_label: "Data de abertura"
-  }
+const { form, errors, resetErrors } = useForm(
+  ["name", "document", "birth_date", "phone"], { ...props.modelValue }
 );
+
+const { config } = usePersonComponentConfig(props.modelValue.legal_nature);
 
 const emit = defineEmits(['update:modelValue', 'prev', 'next'])
 
-const INITIAL_FORM = formFields(["name", "document", "birth_date", "phone"], { ...props.modelValue });
+const { validator } = useValidator(config);
 
-const form = reactive(INITIAL_FORM.form);
-const errors = reactive(INITIAL_FORM.errors);
 
 watch(form, val => {
   emit("update:modelValue", {
@@ -100,33 +87,17 @@ watch(form, val => {
     ...val
   });
   
-  for (let k in errors) {
-    errors[k] = INITIAL_FORM.errors[k];
-  };
+  resetErrors();
 });
 
-const is_valid_fields = computed(() => !!form?.email?.length && !!form?.legal_nature?.length);
-
 const onNext = () => {
-  if (!form.name?.length) {
-    errors.name = ["Digite um nome válido"];
-    return;
+  const { validated_errors } = validator(form);
+
+  for (const k in validated_errors) {
+    errors[k] = validated_errors[k];
   }
 
-  if (!form.document?.length || !isValidCPF(form.document)) {
-    errors.document = ["Digite um CNPJ válido"];
-    return;
-  }
-
-  if (!form.birth_date?.length || removeMask(form.birth_date).length !== 8) {
-    errors.birth_date = ["Digite uma data de abertura válida"];
-    return;
-  }
-
-  if (!form.phone?.length || removeMask(form.phone).length !== 8) {
-    errors.phone = ["Digite um telefone válido. Ex: (DDD) 9 9999-9999"];
-    return;
-  }
+  if (Object.keys(errors).length) return;
 
   emit('next');
 }

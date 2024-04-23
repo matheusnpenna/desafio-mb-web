@@ -8,7 +8,7 @@
       type="password"
       v-model="state.form.email"
       :error="state.errors.email"
-      class="mb-4"
+      class="mb-8"
     />
 
     <div class="flex items-center justify-between">
