@@ -1,0 +1,13 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  border-radius: 4px;
+  height: 38px;
+  border: 1px solid var(--black);
+  font-size: 16px;
+  padding-right: 4px;
+  padding-left: 4px;
+}

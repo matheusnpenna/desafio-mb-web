@@ -1,0 +1,13 @@
+h1 {
+  font-weight: bold;
+  font-size: 28px;
+}
+
+p {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.text-primary {
+  color: var(--primary);
+}
