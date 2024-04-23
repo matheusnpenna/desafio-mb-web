@@ -5,13 +5,13 @@
     <FormInput
       id="email"
       label="Endereço de e-mail"
-      v-model="state.form.email"
-      :error="state.errors.email"
+      v-model="form.email"
+      :error="errors.email"
       class="mb-4"
     />
     <FormRadioGroup 
-      v-model="state.form.legal_nature" 
-      :error="state.errors.legal_nature"
+      v-model="form.legal_nature" 
+      :error="errors.legal_nature"
       class="mb-4"
       :options="[
         { label: 'Pessoal física', value: 'natural' },
@@ -20,15 +20,15 @@
     />
     <FormButton 
       type="submit"
-      :disabled="!is_valid_fields"
     >
       Continuar
     </FormButton>
   </form>
 </template>
 <script setup>
-import { formFields, isValidEmail } from '@/functions/helpers';
-import { computed, reactive, watch } from 'vue';
+import { isValidEmail } from '@/functions/helpers';
+import { useForm } from '@/composables/form';
+import { watch } from 'vue';
 
 const props = defineProps({
   modelValue: {
@@ -39,29 +39,27 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'next'])
 
-const state = reactive(
-  formFields(["email", "legal_nature"], { ...props.modelValue })
+const { form, errors, resetErrors } = useForm(
+  ["email", "legal_nature"], { ...props.modelValue }
 );
 
-watch(state.form, val => {
+watch(form, val => {
   emit("update:modelValue", {
     ...props.modelValue,
     ...val
   });
   
-  state.errors = { email: "", legal_nature: "" };
+  resetErrors();
 });
 
-const is_valid_fields = computed(() => !!state?.form?.email?.length && !!state?.form?.legal_nature?.length);
-
 const onNext = () => {
-  if (!state.form.email?.length || !isValidEmail(state.form?.email)) {
-    state.errors.email = ["Digite um e-mail válido"];
+  if (!form.email?.length || !isValidEmail(form?.email)) {
+    errors.email = ["Digite um e-mail válido"];
     return;
   }
 
-  if (!state.form.legal_nature?.length) {
-    state.errors.legal_nature = ["Escolha o tipo de pessoa"];
+  if (!form.legal_nature?.length) {
+    errors.legal_nature = ["Escolha o tipo de pessoa"];
     return;
   }
 

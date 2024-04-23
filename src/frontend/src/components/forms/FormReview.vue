@@ -115,7 +115,7 @@ const onSubmit = () => {
     errors[k] = validated_errors[k];
   }
 
-  if (Object.keys(errors).length) return;
+  if (Object.keys(errors).find(k => !!errors[k].length)) return;
 
   emit('next');
 }

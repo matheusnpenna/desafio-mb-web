@@ -8,8 +8,9 @@ export function useValidator(config) {
       if (key == "name" && (!form_data[key] || !form_data[key].length)) {
         validated_errors.name = [`Digite ${config.name_error_text}`];
       }
-    
+
       else if (key == "document" && (!form_data[key] || !form_data[key].length || !config.document_validator(form_data[key]))) {
+        console.log(form_data[key], config.document_validator(form_data[key]));
         validated_errors.document = [`Digite um ${config.document} válido`];
       }
     

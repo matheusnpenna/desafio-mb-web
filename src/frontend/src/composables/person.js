@@ -4,6 +4,7 @@ export function usePersonComponentConfig(person_type) {
   return {
     config: person_type == "natural" ? 
       {
+        type: "Física",
         document: "CPF",
         document_max_length: 11,
         document_validator: isValidCPF,
@@ -12,6 +13,7 @@ export function usePersonComponentConfig(person_type) {
         date_label: "Data de nascimento"
       } : 
       {
+        type: "Jurídica",
         document: "CNPJ",
         document_max_length: 15,
         document_validator: isValidCNPJ,

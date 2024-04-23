@@ -34,7 +34,8 @@ export const isValidEmail = email => {
   return true;
 }
 
-export function isValidCPF(cpf) {
+export function isValidCPF(val) {
+  let cpf = removeMask(val);
   if (cpf.length !== 11 || !!cpf.match(/(\d)\1{10}/)) return false;
   cpf = cpf.split("");
   const validator = cpf
@@ -52,7 +53,8 @@ export function isValidCPF(cpf) {
   return !(rest(10, 2) !== validator[0] || rest(11, 1) !== validator[1]);
 }
 
-export function isValidCNPJ(cnpj) {
+export function isValidCNPJ(val) {
+  let cnpj = removeMask(val);
   const format = value => value.replace(/[^\d]+/g, "");
   const isValidNumber = (value, count) =>
     format(value).length === count && !format(value).match(/(\d)\1{10}/);
