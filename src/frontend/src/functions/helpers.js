@@ -123,3 +123,5 @@ export const formatDate = val => {
     .replace(/(\d{2})(\d)/, "$1/$2")
     .replace(/(\d{4})(\d)/, "$1");
 }
+
+export const isValidPassword = val => /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/.test(val);

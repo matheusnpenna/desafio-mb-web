@@ -9,15 +9,13 @@
         @next="next"
       />
     </div>
-    {{ state }}
   </section>
 </template>
 <script setup>
 import { computed, reactive, ref } from "vue";
-import FormLegalPerson from '@/components/forms/FormLegalPerson.vue';
-import FormNaturalPerson from '@/components/forms/FormNaturalPerson.vue';
 import FormPassword from '@/components/forms/FormPassword.vue';
 import FormWelcome from '@/components/forms/FormWelcome.vue';
+import FormPerson from '@/components/forms/FormPerson.vue';
 import FormReview from '@/components/forms/FormReview.vue';
 
 import { formFields } from "@/functions/helpers";
@@ -35,7 +33,7 @@ const state = reactive(formFields([
 
 const form_components = computed(() => ({
   1: FormWelcome,
-  2: state.form.legal_nature == 'natural' ? FormNaturalPerson : FormLegalPerson,
+  2: FormPerson,
   3: FormPassword,
   4: FormReview
 }));
@@ -54,8 +52,4 @@ const prev = () => {
     step_index.value -= 1 
   }
 };
-
-const submit = () => {
-
-}
 </script>

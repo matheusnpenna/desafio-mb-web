@@ -1,3 +1,0 @@
-<template>
-  LEGAL PERSON
-</template>
