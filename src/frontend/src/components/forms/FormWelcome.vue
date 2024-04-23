@@ -11,6 +11,7 @@
     />
     <FormRadioGroup 
       v-model="state.form.legal_nature" 
+      :error="state.errors.legal_nature"
       class="mb-4"
       :options="[
         { label: 'Pessoal física', value: 'natural' },
@@ -54,9 +55,13 @@ watch(state.form, val => {
 const is_valid_fields = computed(() => !!state?.form?.email?.length && !!state?.form?.legal_nature?.length);
 
 const onNext = () => {
-  console.log("TRIGGE")
   if (!state.form.email?.length || !isValidEmail(state.form?.email)) {
     state.errors.email = ["Digite um e-mail válido"];
+    return;
+  }
+
+  if (!state.form.legal_nature?.length) {
+    state.errors.legal_nature = ["Escolha o tipo de pessoa"];
     return;
   }
 

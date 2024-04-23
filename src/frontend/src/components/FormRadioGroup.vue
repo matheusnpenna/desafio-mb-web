@@ -1,24 +1,28 @@
 <template>
-  <fieldset>
-    <div
-      v-for="({ value, label }, i) in props.options"
-      :key="`${i}`"
-      class="flex items-center"
-    >
-      <input
-        :id="`${props.id}-${i}`"
-        v-model="model" 
-        type="radio" 
-        :value="value"
-        name="group1"
-        class="mr-2"
-      />
-      <label :for="`${props.id}-${i}`">{{ label }}</label>
-    </div>
-  </fieldset>
+  <div>
+    <fieldset>
+      <div
+        v-for="({ value, label }, i) in props.options"
+        :key="`${i}`"
+        class="flex items-center"
+        :class="{ 'text-danger': isError }"
+      >
+        <input
+          :id="`${props.id}-${i}`"
+          v-model="model" 
+          type="radio" 
+          :value="value"
+          name="group1"
+          class="mr-2"
+        />
+        <label :for="`${props.id}-${i}`">{{ label }}</label>
+      </div>
+    </fieldset>
+    <small v-if="isError" class="text-danger">{{ props.error[0] }}</small>
+  </div>
 </template>
 <script setup>
-import { watch } from 'vue';
+import { computed, watch } from 'vue';
 
 const props = defineProps({
   id: {
@@ -33,11 +37,16 @@ const props = defineProps({
     type: Array,
     default: () => [],
     validators: list => !list.find(o => !o.value || !o.label)
+  },
+  error: {
+    type: Array,
+    default: undefined
   }
 })
 const emit = defineEmits(["update:modelValue"]);
 const model = defineModel();
 watch(model, v => emit("update:modelValue", v))
+const isError = computed(() => props.error && props.error?.length > 0);
 </script>
 <style scoped>
 fieldset {
