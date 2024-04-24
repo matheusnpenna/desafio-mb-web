@@ -1,6 +1,9 @@
 <template>
   <section class="home-view">
-    <div class="container mb-8">
+    <div v-if="register_success" class="container">
+      <FormSuccess @reset="reset" />
+    </div>
+    <div v-else class="container">
       <p>Etapa <span class="text-primary">{{ step_index }}</span> de {{ step_count }}</p>
       <component 
         :is="FORM_COMPONENT_MAP[step_index]" 
@@ -12,20 +15,21 @@
         @onSubmit="onSubmit"
       />
     </div>
-    {{ state.form }}
   </section>
 </template>
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref } from "vue";
 
 import FormPassword from '@/components/forms/FormPassword.vue';
 import FormWelcome from '@/components/forms/FormWelcome.vue';
 import FormPerson from '@/components/forms/FormPerson.vue';
 import FormReview from '@/components/forms/FormReview.vue';
 
-import { useAPI } from "@/composables/api";
 import { formFields } from "@/functions/helpers";
+import { useAPI } from "@/composables/api";
+import FormSuccess from "@/components/forms/FormSuccess.vue";
 const { postRegister } = useAPI();
+const register_success = ref(false);
 const loading = ref(false);
 const step_index = ref(1);
 
@@ -51,9 +55,10 @@ const FORM_COMPONENT_MAP = {
 
 const step_count = Object.keys(FORM_COMPONENT_MAP).length;
 
-watch(state.form, v => {
-  console.log("FORM CHANGES", v);
-})
+const reset = () => {
+  for (let k in { ...INITIAL_FORM }) state[k] = INITIAL_FORM[k];
+  step_index.value = 1;
+}
 
 const next = () => { 
   if (step_index.value < step_count) {
@@ -71,7 +76,12 @@ const onSubmit = () => {
   loading.value = true;
   postRegister(state.form)
   .then(data => {
-    console.log("SUCCESS REQUEST", data);
+    if (data.status == 200) {
+      register_success.value = true;
+    } else if (data.status == 400) {
+      for (let k in data) 
+        state.errors[k] = data[k];
+    }
   })
   .catch(e => {
     console.log("ERROR REQUEST", e);

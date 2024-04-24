@@ -94,10 +94,14 @@ const props = defineProps({
   loading: {
     type: Boolean,
     default: true
+  },
+  errors: {
+    type: Object,
+    default: () => {}
   }
 });
 
-const emit = defineEmits(['update:modelValue', 'prev', 'submit'])
+const emit = defineEmits(['update:modelValue', 'prev', 'onSubmit'])
 
 const { form, errors, resetErrors } = useForm(["email", "name", "document", "birth_date", "phone", "password"], { ...props.modelValue });
 const { config } = usePersonComponentConfig(props.modelValue.legal_nature);
@@ -110,6 +114,10 @@ watch(form, val => {
   });
   
   resetErrors();
+});
+
+watch(props.errors, val => {
+  for(let k in val) errors[k] = val[k];
 });
 
 const onSubmit = () => {

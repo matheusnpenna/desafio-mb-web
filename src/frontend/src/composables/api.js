@@ -15,7 +15,10 @@ export function useAPI() {
         method: 'POST',
         body: JSON.stringify(data)
       })
-      .then(r => ({ status: r.status, ...r.json() }))
+      .then(async r => {
+        const data = await r.json();
+        return { status: r.status, ...data };
+      })
       .then(resolve)
       .catch(reject)
     });
