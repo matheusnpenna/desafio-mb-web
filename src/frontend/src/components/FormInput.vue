@@ -1,20 +1,22 @@
 <template>
   <div class="form-group">
     <label :for="id" class="mb-2">{{ props.label }}</label>
-    <input 
-      :id="id"
-      class="form-control"
-      :class="{ 'border-danger': isError }" 
-      :value="props.modelValue" 
-      :maxLength="props.maxLength"
-      @input="emit('update:modelValue', format($event.target.value))"
-      :type="!show_password && props.type"
-    />
+    <div class="form-input-wrapper">
+      <input 
+        :id="id"
+        class="form-control"
+        :class="{ 'border-danger': isError }" 
+        :value="props.modelValue" 
+        :maxLength="props.maxLength"
+        @input="emit('update:modelValue', format($event.target.value))"
+        :type="!show_password && props.type"
+      />
+      <button v-if="props.type == 'password'" class="btn btn-sm" type="button" @click.stop="show_password = !show_password">
+        <IconEyeSlash v-if="show_password" />
+        <IconEye v-else />
+      </button>
+    </div>
     <small v-if="isError" class="text-danger">{{ props.error[0] }}</small>
-    <button v-if="props.type == 'password'" class="btn btn-password-visibility btn-sm" type="button" @click.stop="show_password = !show_password">
-      <IconEyeSlash v-if="show_password" />
-      <IconEye v-else />
-    </button>
   </div>
 </template>
 <script setup>
@@ -78,23 +80,3 @@ const format = val => {
   return val;
 }
 </script>
-<style scoped>
-.form-group {
-  position: relative;
-}
-
-.btn-password-visibility {
-  position: absolute;
-  left: 98%;
-  top: 90%;
-  transform: translateY(-90%) translateX(-98%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  & svg {
-    height: 1rem;
-    width: 1rem;
-  }
-}
-
-</style>

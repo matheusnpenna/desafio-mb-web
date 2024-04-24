@@ -31,7 +31,7 @@ import FormSuccess from "@/components/forms/FormSuccess.vue";
 const { postRegister } = useAPI();
 const register_success = ref(false);
 const loading = ref(false);
-const step_index = ref(1);
+const step_index = ref(3);
 
 const INITIAL_FORM = formFields(
   [
