@@ -1,7 +1,7 @@
 import { formFields } from "@/functions/helpers";
 import { reactive } from "vue";
 
-export function useForm(fields, defaults) {
+export function useForm(fields, defaults = {}) {
   const INITIAL_FORM = formFields(fields, { ...defaults });
 
   const form = reactive({ ...INITIAL_FORM.form });

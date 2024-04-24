@@ -85,7 +85,6 @@ import { usePersonComponentConfig } from '@/composables/person';
 import { useValidator } from '@/composables/validate';
 import { useForm } from '@/composables/form';
 import { ref, watch } from 'vue';
-import { useAPI } from '@/composables/api';
 
 const props = defineProps({
   modelValue: {
@@ -94,12 +93,11 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['update:modelValue', 'prev', 'next'])
+const emit = defineEmits(['update:modelValue', 'prev', 'submit'])
 
 const { form, errors, resetErrors } = useForm(["email", "name", "document", "birth_date", "phone", "password"], { ...props.modelValue });
 const { config } = usePersonComponentConfig(props.modelValue.legal_nature);
 const { validator } = useValidator(config);
-const { postRegister } = useAPI();
 
 const loading = ref(false);
 
@@ -121,17 +119,6 @@ const onSubmit = () => {
 
   if (Object.keys(errors).find(k => !!errors[k].length)) return;
 
-  loading.value = true;
-
-  postRegister(form)
-  .then(data => {
-    console.log(data);
-  })
-  .catch(e => {
-    console.log(e);
-  })
-  .finally(() => {
-    loading.value = false;
-  })
+  emit('submit');
 }
 </script>
