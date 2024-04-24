@@ -1,6 +1,6 @@
 <template>
   <div class="form-success-feedback">
-    <h1 class="text-center mb-4">Registro concluído</h1>
+    <h1 class="text-center mb-8">Registro concluído</h1>
     <div class="text-center text-primary mb-8">
       <IconCheckCircle />
     </div>
