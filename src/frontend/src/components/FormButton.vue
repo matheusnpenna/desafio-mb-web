@@ -6,13 +6,15 @@
     :type="type"
     @click.stop="emit('click')"
   >
-    <slot>{{ text }}</slot>
+    <LoadingSpinner v-if="loading" />
+    <slot v-else>{{ text }}</slot>
   </button>
 </template>
 <script setup>
 import { computed } from 'vue';
+import LoadingSpinner from './LoadingSpinner.vue';
 
-const { variant, text, fill, type } = defineProps({
+const { variant, text, fill, loading, type } = defineProps({
   variant: {
     type: String,
     default: "primary"
@@ -27,6 +29,10 @@ const { variant, text, fill, type } = defineProps({
     default: false
   },
   fill: {
+    type: Boolean,
+    default: false
+  },
+  loading: {
     type: Boolean,
     default: false
   }
