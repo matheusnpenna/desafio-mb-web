@@ -8,6 +8,7 @@
         :class="{ 'border-danger': isError }" 
         :value="props.modelValue" 
         :maxLength="props.maxLength"
+        :autocomplete="props.autocomplete"
         @input="emit('update:modelValue', format($event.target.value))"
         :type="!show_password && props.type"
       />
@@ -43,6 +44,10 @@ const props = defineProps({
   maxLength: {
     type: Number,
     default: 524288
+  },
+  autocomplete: {
+    type: [String, Boolean],
+    default: false
   },
   type: {
     type: String,

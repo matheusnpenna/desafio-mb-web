@@ -19,8 +19,8 @@ class Company {
       name: "nome",
       email: "e-mail",
       legal_nature: "pessoa física ou jurídica",
-      document: legal_nature == 'natural' ? "CPF" : "CNPJ",
-      birth_date: legal_nature == 'natural' ? "data de nascimento" : "data de abertura",
+      document: legal_nature == 'pf' ? "CPF" : "CNPJ",
+      birth_date: legal_nature == 'pf' ? "data de nascimento" : "data de abertura",
       phone: "telefone",
       password: "senha",
     }

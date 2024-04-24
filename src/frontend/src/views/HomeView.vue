@@ -83,9 +83,6 @@ const onSubmit = () => {
         state.errors[k] = data[k];
     }
   })
-  .catch(e => {
-    console.log("ERROR REQUEST", e);
-  })
   .finally(() => {
     loading.value = false;
   })

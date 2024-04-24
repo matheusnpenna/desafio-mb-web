@@ -6,6 +6,7 @@
       id="password"
       label="Sua senha"
       type="password"
+      :autocomplete="false"
       v-model="form.password"
       :error="errors.password"
       class="mb-8"

@@ -92,6 +92,14 @@ export function isValidCNPJ(val) {
   return validate(firstDigit, lastDigit, validator(cnpj));
 }
 
+export const isValidDate = date => {
+  return !isNaN(
+    new Date(
+      `${date}`.split("/").reverse().join("/")
+    )
+  );
+}
+
 export const formatCnpjCpf = value => {
   if (!value && value == "-") return "-";
 

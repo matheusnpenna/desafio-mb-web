@@ -90,12 +90,8 @@ class CompanyService {
     return /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/.test(val);
   }
 
-  addCompany(company) {
-    return { ...company, created_at: new Date().toString(), deleted_at: null };
-  }
-
   getConfig() {
-    return  this.company.legal_nature == "natural" ? 
+    return  this.company.legal_nature == "pf" ? 
       {
         type: "Física",
         document: "CPF",

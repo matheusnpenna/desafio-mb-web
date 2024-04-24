@@ -1,4 +1,4 @@
-import { isValidPassword, removeMask } from '@/functions/helpers';
+import { isValidDate, isValidPassword, removeMask } from '@/functions/helpers';
 
 export function useValidator(config) {
 
@@ -16,7 +16,7 @@ export function useValidator(config) {
         validated_errors[key] = [`Digite um ${config.document} válido`];
       }
     
-      else if (key == "birth_date" && (!is_filled(form_data[key]) || removeMask(form_data[key]).length !== 8)) {
+      else if (key == "birth_date" && (!is_filled(form_data[key]) || !isValidDate(form_data[key]))) {
         validated_errors[key] = [`Digite uma ${config.date_label.toLowerCase()} válida`];
       }
     

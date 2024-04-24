@@ -14,8 +14,8 @@
       :error="errors.legal_nature"
       class="mb-4"
       :options="[
-        { label: 'Pessoal física', value: 'natural' },
-        { label: 'Pessoal jurídica', value: 'legal' }
+        { label: 'Pessoal física', value: 'pf' },
+        { label: 'Pessoal jurídica', value: 'pj' }
       ]" 
     />
     <FormButton 

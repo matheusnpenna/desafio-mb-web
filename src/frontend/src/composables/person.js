@@ -2,7 +2,7 @@ import { isValidCNPJ, isValidCPF } from "@/functions/helpers";
 
 export function usePersonComponentConfig(person_type) {
   return {
-    config: person_type == "natural" ? 
+    config: person_type == "pf" ? 
       {
         type: "Física",
         document: "CPF",
