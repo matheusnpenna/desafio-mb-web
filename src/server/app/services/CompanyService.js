@@ -90,6 +90,14 @@ class CompanyService {
     return /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/.test(val);
   }
 
+  static isValidDate(date) {
+    return !isNaN(
+      new Date(
+        `${date}`.split("/").reverse().join("/")
+      )
+    );
+  }
+
   getConfig() {
     return  this.company.legal_nature == "pf" ? 
       {
@@ -128,7 +136,7 @@ class CompanyService {
         errors[key] = [`Digite um ${this.config.document} válido`];
       }
     
-      else if (key == "birth_date" && CompanyService.removeMask(this.company[key]).length !== 8) {
+      else if (key == "birth_date" && !CompanyService.isValidDate(this.company[key])) {
         errors[key] = [`Digite uma ${this.config.date_label.toLowerCase()} válida`];
       }
     

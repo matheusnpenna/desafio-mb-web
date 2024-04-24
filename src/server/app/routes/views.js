@@ -5,9 +5,12 @@ module.exports = (function () {
   
   const router = express.Router();
   
-  router.get("/*", (req, res) => {
+  router.get("/registration", (req, res) => {
     res.sendFile(path.join(__dirname, "../../../frontend/dist/index.html"));
   });
 
+  router.get("/", (req, res) => {
+    res.redirect("/registration");
+  });
   return router;
 })();

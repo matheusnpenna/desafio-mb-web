@@ -56,19 +56,22 @@ const FORM_COMPONENT_MAP = {
 const step_count = Object.keys(FORM_COMPONENT_MAP).length;
 
 const reset = () => {
-  for (let k in { ...INITIAL_FORM }) state[k] = INITIAL_FORM[k];
+  for (let k in { ...INITIAL_FORM }) {
+    state[k] = INITIAL_FORM[k];
+  }
   step_index.value = 1;
+  register_success.value = false;
 }
 
 const next = () => { 
   if (step_index.value < step_count) {
-    step_index.value += 1 
+    step_index.value += 1;
   }
 };
 
 const prev = () => {
   if (step_index.value > 0) {
-    step_index.value -= 1 
+    step_index.value -= 1;
   }
 };
 
