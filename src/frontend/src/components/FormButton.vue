@@ -1,6 +1,7 @@
 <template>
   <button 
-    :class="`btn btn-${variant} ${classes}`" 
+    class="btn"
+    :class="classObj" 
     :aria-describedby="text" 
     :type="type"
     @click.stop="emit('click')"
@@ -9,14 +10,12 @@
   </button>
 </template>
 <script setup>
-const { variant, text, classes, type } = defineProps({
+import { computed } from 'vue';
+
+const { variant, text, fill, type } = defineProps({
   variant: {
     type: String,
     default: "primary"
-  },
-  classes: {
-    type: String,
-    default: ""
   },
   text: String,
   type: {
@@ -26,7 +25,15 @@ const { variant, text, classes, type } = defineProps({
   disabled: {
     type: Boolean,
     default: false
+  },
+  fill: {
+    type: Boolean,
+    default: false
   }
 })
 const emit = defineEmits(['click'])
+const classObj = computed(() => ({
+  [`btn-${variant}`]: true,
+  'btn-fill': fill
+}))
 </script>

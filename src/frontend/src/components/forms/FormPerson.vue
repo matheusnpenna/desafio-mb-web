@@ -47,11 +47,12 @@
       <FormButton 
         variant="outline-primary"
         class="mr-8"
+        fill
         @click="$emit('prev')"
       >
         Voltar
       </FormButton>
-      <FormButton  type="submit">
+      <FormButton fill type="submit">
         Continuar
       </FormButton>
     </div>

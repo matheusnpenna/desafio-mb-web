@@ -6,8 +6,8 @@
       id="password"
       label="Sua senha"
       type="password"
-      v-model="state.form.email"
-      :error="state.errors.email"
+      v-model="form.password"
+      :error="errors.password"
       class="mb-8"
     />
 
@@ -15,12 +15,14 @@
       <FormButton 
         variant="outline-primary"
         class="mr-8"
+        fill
+        @click="emit('prev')"
       >
         Voltar
       </FormButton>
       <FormButton 
         type="submit"
-        :disabled="!is_valid_fields"
+        fill
       >
         Continuar
       </FormButton>
@@ -28,8 +30,9 @@
   </form>
 </template>
 <script setup>
-import { formFields, isValidPassword } from '@/functions/helpers';
-import { computed, reactive, watch } from 'vue';
+import { useForm } from '@/composables/form';
+import { isValidPassword } from '@/functions/helpers';
+import { watch } from 'vue';
 
 const props = defineProps({
   modelValue: {
@@ -40,24 +43,22 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'prev', 'next'])
 
-const state = reactive(
-  formFields(["password"], { ...props.modelValue })
+const { form, errors, resetErrors } = useForm(
+  ["password"], { ...props.modelValue }
 );
 
-watch(state.form, val => {
+watch(form, val => {
   emit("update:modelValue", {
     ...props.modelValue,
     ...val
   });
   
-  state.errors = { email: "", legal_nature: "" };
+  resetErrors();
 });
 
-const is_valid_fields = computed(() => !!state?.form?.email?.length && !!state?.form?.legal_nature?.length);
-
 const onNext = () => {
-  if (!state.form.password?.length || !isValidPassword(state.form?.password)) {
-    state.errors.password = ["Sua senha deve conter 8 dígitos, com pelo menos 1 número, 1 letra minúscula e 1 letra maiúscula."];
+  if (!form.password?.length || !isValidPassword(form?.password)) {
+    errors.password = ["Sua senha deve conter 8 dígitos, com pelo menos 1 número, 1 letra minúscula e 1 letra maiúscula."];
     return;
   }
 

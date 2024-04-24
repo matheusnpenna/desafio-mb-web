@@ -19,6 +19,7 @@
       ]" 
     />
     <FormButton 
+      fill
       type="submit"
     >
       Continuar

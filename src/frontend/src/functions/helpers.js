@@ -17,7 +17,7 @@ export const formFields = (fields, initial = {}) => {
 };
 
 export const removeMask = maskedValue => {
-  return maskedValue
+  return `${maskedValue}`
     .replace(/\s/g, "")
     .replace(/-/g, "")
     .replace(/\(/g, "")
@@ -55,6 +55,7 @@ export function isValidCPF(val) {
 
 export function isValidCNPJ(val) {
   let cnpj = removeMask(val);
+  console.log(val, cnpj);
   const format = value => value.replace(/[^\d]+/g, "");
   const isValidNumber = (value, count) =>
     format(value).length === count && !format(value).match(/(\d)\1{10}/);

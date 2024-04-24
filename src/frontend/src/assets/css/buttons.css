@@ -2,7 +2,7 @@
   border-radius: 8px;
   font-weight: 700;
   display: block;
-  width: 100%;
+  width: fit-content;
   height: 48px;
   font-weight: 500;
   box-shadow: none;
@@ -12,6 +12,7 @@
   transition: opacity .2s;
   cursor: pointer;
   border: 1px solid transparent;
+  background-color: transparent;
   padding: .375rem .75rem;
   user-select: none;
   opacity: 1;
@@ -23,6 +24,15 @@
     background-color: gray;
     color: black;
   }
+}
+
+.btn-sm {
+  height: fit-content;
+  width: fit-content;
+}
+
+.btn-fill {
+  width: 100%;
 }
 
 .btn-primary {
