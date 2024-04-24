@@ -44,7 +44,7 @@ const INITIAL_FORM = formFields(
     "password"
   ])
 
-const state = reactive(INITIAL_FORM);
+const state = reactive({ ...INITIAL_FORM });
 
 const FORM_COMPONENT_MAP = {
   1: FormWelcome,
@@ -56,8 +56,11 @@ const FORM_COMPONENT_MAP = {
 const step_count = Object.keys(FORM_COMPONENT_MAP).length;
 
 const reset = () => {
-  for (let k in { ...INITIAL_FORM }) {
-    state[k] = INITIAL_FORM[k];
+  for (let k in INITIAL_FORM.form) {
+    state.form[k] = INITIAL_FORM.form[k];
+  }
+  for (let k in INITIAL_FORM.errors) {
+    state.errors[k] = INITIAL_FORM.errors[k];
   }
   step_index.value = 1;
   register_success.value = false;
