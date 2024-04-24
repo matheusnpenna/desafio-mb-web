@@ -38,7 +38,7 @@ const form_components = computed(() => ({
   4: FormReview
 }));
 
-const step_index = ref(3);
+const step_index = ref(1);
 
 const step_count = Object.keys(form_components.value).length;
 
