@@ -56,8 +56,8 @@
       id="password"
       label="Sua senha"
       type="password"
-      v-model="form.email"
-      :error="errors.email"
+      v-model="form.password"
+      :error="errors.password"
       class="mb-8"
     />
 
@@ -65,12 +65,14 @@
       <FormButton 
         variant="outline-primary"
         class="mr-8"
+        fill
         @click="$emit('prev')"
       >
         Voltar
       </FormButton>
       <FormButton 
         type="submit"
+        fill
       >
         Cadastrar
       </FormButton>
@@ -96,7 +98,7 @@ const { validator } = useValidator(config);
 
 const emit = defineEmits(['update:modelValue', 'prev', 'next'])
 
-const { form, errors, resetErrors } = useForm(["name", "document", "birth_date", "phone"], { ...props.modelValue });
+const { form, errors, resetErrors } = useForm(["email", "name", "document", "birth_date", "phone", "password"], { ...props.modelValue });
 
 
 watch(form, val => {

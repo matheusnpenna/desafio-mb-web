@@ -43,7 +43,7 @@ const step_index = ref(1);
 const step_count = Object.keys(form_components.value).length;
 
 const next = () => { 
-  if (step_index.value < step_count - 1) {
+  if (step_index.value < step_count) {
     step_index.value += 1 
   }
 };

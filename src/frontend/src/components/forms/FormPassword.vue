@@ -57,7 +57,7 @@ watch(form, val => {
 });
 
 const onNext = () => {
-  if (!form.password?.length || !isValidPassword(form?.password)) {
+  if (!form.password || !form.password.length || !isValidPassword(form.password)) {
     errors.password = ["Sua senha deve conter 8 dígitos, com pelo menos 1 número, 1 letra minúscula e 1 letra maiúscula."];
     return;
   }
