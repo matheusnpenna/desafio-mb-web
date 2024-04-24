@@ -73,7 +73,7 @@
       <FormButton 
         type="submit"
         fill
-        :loading="loading"
+        :loading="props.loading"
       >
         Cadastrar
       </FormButton>
@@ -84,12 +84,16 @@
 import { usePersonComponentConfig } from '@/composables/person';
 import { useValidator } from '@/composables/validate';
 import { useForm } from '@/composables/form';
-import { ref, watch } from 'vue';
+import { watch } from 'vue';
 
 const props = defineProps({
   modelValue: {
     type: Object,
     default: () => {}
+  },
+  loading: {
+    type: Boolean,
+    default: true
   }
 });
 
@@ -98,8 +102,6 @@ const emit = defineEmits(['update:modelValue', 'prev', 'submit'])
 const { form, errors, resetErrors } = useForm(["email", "name", "document", "birth_date", "phone", "password"], { ...props.modelValue });
 const { config } = usePersonComponentConfig(props.modelValue.legal_nature);
 const { validator } = useValidator(config);
-
-const loading = ref(false);
 
 watch(form, val => {
   emit("update:modelValue", {
@@ -119,6 +121,6 @@ const onSubmit = () => {
 
   if (Object.keys(errors).find(k => !!errors[k].length)) return;
 
-  emit('submit');
+  emit('onSubmit');
 }
 </script>

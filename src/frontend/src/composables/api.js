@@ -7,6 +7,7 @@ const config = {
   baseURL: 'http://localhost:8989/api'
 }
 export function useAPI() {
+
   const postRegister = (data) => {
     return new Promise((resolve, reject) => {
       return fetch(`${config.baseURL}/register`, {
@@ -14,7 +15,7 @@ export function useAPI() {
         method: 'POST',
         body: JSON.stringify(data)
       })
-      .then(r => r.json())
+      .then(r => ({ status: r.status, ...r.json() }))
       .then(resolve)
       .catch(reject)
     });

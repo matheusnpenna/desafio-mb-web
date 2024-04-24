@@ -47,6 +47,7 @@ const props = defineProps({
     default: "text",
     validator: val => [
       "text",
+      "tel",
       "number",
       "password",
       "email",

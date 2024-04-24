@@ -1,40 +1,47 @@
 <template>
-  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+  <div class="loading-spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </template>
 <style scoped>
-
-.lds-ring,
-.lds-ring div {
+.loading-spinner {
+  color: black;
+}
+.loading-spinner,
+.loading-spinner div {
   box-sizing: border-box;
 }
-.lds-ring {
+.loading-spinner {
   display: inline-block;
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
 }
-.lds-ring div {
+.loading-spinner div {
   box-sizing: border-box;
   display: block;
   position: absolute;
-  width: 44px;
-  height: 44px;
-  margin: 8px;
-  border: 8px solid currentColor;
+  width: 24px;
+  height: 24px;
+  margin: 3px;
+  border: 2px solid currentColor;
   border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  animation: loading-spinner-kf 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: currentColor transparent transparent transparent;
 }
-.lds-ring div:nth-child(1) {
+.loading-spinner div:nth-child(1) {
   animation-delay: -0.45s;
 }
-.lds-ring div:nth-child(2) {
+.loading-spinner div:nth-child(2) {
   animation-delay: -0.3s;
 }
-.lds-ring div:nth-child(3) {
+.loading-spinner div:nth-child(3) {
   animation-delay: -0.15s;
 }
-@keyframes lds-ring {
+@keyframes loading-spinner-kf {
   0% {
     transform: rotate(0deg);
   }

@@ -9,7 +9,6 @@ export function useForm(fields, defaults = {}) {
 
   const resetErrors = () => {
     for(let k in INITIAL_FORM.errors) {
-      console.log(INITIAL_FORM.errors[k], errors[k])
       errors[k] = INITIAL_FORM.errors[k];
     }
   }
