@@ -1,6 +1,6 @@
 <template>
   <div>
-    <fieldset>
+    <fieldset> 
       <div
         v-for="({ value, label }, i) in props.options"
         :key="`${i}`"
