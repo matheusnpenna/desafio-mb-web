@@ -8,6 +8,7 @@ import FormWelcome from '../forms/FormWelcome.vue'
 import FormInput from '../FormInput.vue';
 import FormButton from '../FormButton.vue';
 import FormRadioGroup from '../FormRadioGroup.vue';
+import FormRadio from '../FormRadio.vue';
 
 describe('FormWelcome', () => {
   const wrapper = mount(FormWelcome, {
@@ -15,7 +16,8 @@ describe('FormWelcome', () => {
       components: {
         FormInput,
         FormButton,
-        FormRadioGroup
+        FormRadioGroup,
+        FormRadio
       }
     }
   });

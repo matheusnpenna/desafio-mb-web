@@ -13,7 +13,7 @@ describe('FormPassword', () => {
     global: {
       components: {
         FormInput,
-        FormButton
+        FormButton,
       }
     }
   });

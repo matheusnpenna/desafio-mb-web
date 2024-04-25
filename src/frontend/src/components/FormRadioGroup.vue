@@ -6,22 +6,15 @@
         :key="`${i}`"
         class="flex items-center"
         :class="{ 'text-danger': isError }"
-      >
-        <input
-          :id="`${props.id}-${i}`"
-          v-model="model" 
-          type="radio" 
-          :value="value"
-          name="group1"
-          class="mr-2"
-        />
-        <label :for="`${props.id}-${i}`">{{ label }}</label>
+      > 
+        <FormRadio :id="`${props.id}-${i}`" v-model="model" :label="label" :value="value" name="group1" class="mr-2" />
       </div>
     </fieldset>
     <small v-if="isError" class="text-danger">{{ props.error[0] }}</small>
   </div>
 </template>
 <script setup>
+import FormRadio from './FormRadio.vue';
 import { computed, watch } from 'vue';
 
 const props = defineProps({
