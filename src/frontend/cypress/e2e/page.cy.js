@@ -10,12 +10,12 @@ describe('Page tests', () => {
     // Step 1
     cy.visit('/')
     cy.get('#email').type('test@test.com')
-    cy.get('[type="radio"]').check('pf')
+    cy.get('[data-test-id="radio-input-pf"]').click()
     cy.get('button[type="submit"]').click()
     
     // Step 2
     cy.get('#name').type('Dev frontend test')
-    cy.get('#cpf').type('06914804001')
+    cy.get('#document').type('03785850530')
     cy.get('#birth_date').type('14041995')
     cy.get('#phone').type('75991025971')
     cy.get('button[type="submit"]').click()

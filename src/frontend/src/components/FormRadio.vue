@@ -1,5 +1,5 @@
 <template>
-  <label class="form-radio-component form-radio-control">
+  <label class="form-radio-component form-radio-control" :data-test-id="`radio-input-${props.value}`">
     {{ label }}
     <input 
       :value="props.value" 

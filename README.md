@@ -37,8 +37,21 @@ yarn frontend:test:unit
 
 ### Run End-to-End Frontend Tests with [Cypress](https://www.cypress.io/)
 
+To run the e2e test with cypress you have to up both the server and the frontend dev server
+
+##### Open 1 terminal and run:
 ```sh
-yarn frontend:test:e2e:dev
+yarn frontend:dev
+```
+
+##### Open another terminal and run:
+```sh
+yarn start
+```
+
+##### Open another terminal and run:
+```sh
+yarn frontend:test:e2e
 ```
 
 ```sh
