@@ -9,30 +9,30 @@ This app is available on [https://matheuspenna-desafio-mb-web.vercel.app/](https
 ## Project Setup
 
 ```sh
-yarn setup
+npm run setup
 ```
 
 ## To preview project
 ```sh
-yarn preview
+npm run preview
 ```
 
 ### Compile and Hot-Reload Frontend for Development
 
 ```sh
-yarn frontend:dev
+npm run frontend:dev
 ```
 
 ### Compile and Minify Frontend for Production
 
 ```sh
-yarn frontend:build
+npm run frontend:build
 ```
 
 ### Run Unit Frontend Tests with [Vitest](https://vitest.dev/)
 
 ```sh
-yarn frontend:test:unit
+npm run frontend:test:unit
 ```
 
 ### Run End-to-End Frontend Tests with [Cypress](https://www.cypress.io/)
@@ -41,20 +41,20 @@ To run the e2e test with cypress you have to up both the server and the frontend
 
 ##### Open 1 terminal and run:
 ```sh
-yarn frontend:dev
+npm run frontend:dev
 ```
 
 ##### Open another terminal and run:
 ```sh
-yarn start
+npm run start
 ```
 
 ##### Open another terminal and run:
 ```sh
-yarn frontend:test:e2e
+npm run frontend:test:e2e
 ```
 
 ```sh
-yarn frontend:build
-yarn frontend:test:e2e
+npm run frontend:build
+npm run frontend:test:e2e
 ```
