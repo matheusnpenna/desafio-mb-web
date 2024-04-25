@@ -6,11 +6,11 @@ module.exports = (function () {
   const router = express.Router();
   
   router.get("/registration", (req, res) => {
-    res.sendFile(path.join(__dirname, "../views/index.html"));
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
-  // router.get("/", (req, res) => {
-  //   res.redirect("/registration");
-  // });
+  router.get("/", (req, res) => {
+    res.redirect("/registration");
+  });
   return router;
 })();

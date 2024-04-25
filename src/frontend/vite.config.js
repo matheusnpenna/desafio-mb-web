@@ -13,7 +13,7 @@ export default defineConfig({
     VueDevTools(),
   ],
   build: {
-    outDir: "../server/app/views"
+    outDir: "../server/app/public"
   },
   resolve: {
     alias: {

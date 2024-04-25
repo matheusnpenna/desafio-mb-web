@@ -6,9 +6,11 @@ const cors = require('cors');
 
 dotenv.config();
 const app = express();
-app.use(bodyParser.json());;
+app.use(express.static(path.join(__dirname, "public")))
+
+app.use(bodyParser.json());
 app.use(cors())
-app.use(express.static('./views'))
 app.use(require('./routes/api'))
 app.use(require('./routes/views'))
+
 module.exports = app;
