@@ -4,7 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "serve": "cross-env NODE_ENV=development nodemon ./src/server/server.js"
+    "server:serve": "cross-env NODE_ENV=development nodemon ./src/server/server.js",
+    "frontend:dev": "cd src/frontend && yarn dev",
+    "frontend:build": "cd src/frontend && yarn build && cd ../../",
+    "preview": "cd src/frontend && yarn build && cd ../../ && cross-env NODE_ENV=development nodemon ./src/server/server.js"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
