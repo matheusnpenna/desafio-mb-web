@@ -2,56 +2,52 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
+## Demo
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+This app is available [here](https://code.visualstudio.com/)
 
 ## Project Setup
 
 ```sh
-yarn
+yarn setup
 ```
 
-### Compile and Hot-Reload for Development
-
+## To preview project
 ```sh
-yarn dev
+yarn preview
 ```
 
-### Compile and Minify for Production
+### Compile and Hot-Reload Frontend for Development
 
 ```sh
-yarn build
+yarn frontend:dev
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### Compile and Minify Frontend for Production
 
 ```sh
-yarn test:unit
+yarn frontend:build
 ```
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+### Run Unit Frontend Tests with [Vitest](https://vitest.dev/)
 
 ```sh
-yarn test:e2e:dev
+yarn frontend:test:unit
 ```
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+### Run End-to-End Frontend Tests with [Cypress](https://www.cypress.io/)
 
 ```sh
-yarn build
-yarn test:e2e
+yarn frontend:test:e2e:dev
+```
+
+```sh
+yarn frontend:build
+yarn frontend:test:e2e
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
 
 ```sh
-yarn lint
+yarn frontend:lint
 ```
