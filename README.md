@@ -23,12 +23,6 @@ npm run preview
 npm run frontend:dev
 ```
 
-### Compile and Minify Frontend for Production
-
-```sh
-npm run frontend:build
-```
-
 ### Run Unit Frontend Tests with [Vitest](https://vitest.dev/)
 
 ```sh
@@ -54,7 +48,11 @@ npm run start
 npm run frontend:test:e2e
 ```
 
+##### Or if you will build
+###### Compile and Minify Frontend for Production
+
 ```sh
 npm run frontend:build
-npm run frontend:test:e2e
 ```
+
+## OBS: The pre build script will execute both unit and e2e tests. Then, to build you will need to run npm run start and npm run frontend:dev before
