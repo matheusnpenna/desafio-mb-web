@@ -13,7 +13,7 @@ export function useAPI() {
 
   const postRegister = (data) => {
     return new Promise((resolve, reject) => {
-      return fetch(`${baseURL}/register`, {
+      return fetch(`${baseURL}/registration`, {
         ...DEFAULT_OPTIONS,
         method: 'POST',
         body: JSON.stringify(data)

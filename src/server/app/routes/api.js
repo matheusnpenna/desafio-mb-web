@@ -4,7 +4,7 @@ module.exports = (function () {
 
   const router = express.Router();
 
-  router.post("/api/register", async (req, res) => {
+  router.post("/api/registration", async (req, res) => {
     const data = req.body;
     const service = new CompanyService(data);
 
