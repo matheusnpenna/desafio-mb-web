@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "node ./src/server/server.js",
     "server:serve": "cross-env NODE_ENV=development nodemon ./src/server/server.js",
     "frontend:dev": "cd src/frontend && yarn dev",
     "frontend:build": "cd src/frontend && yarn build && cd ../../",
