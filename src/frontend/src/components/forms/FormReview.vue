@@ -22,7 +22,7 @@
     />
 
     <FormInput
-      id="cpf"
+      id="document"
       :label="config.document"
       v-model="form.document"
       :error="errors.document"
