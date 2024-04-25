@@ -45,9 +45,3 @@ yarn frontend:test:e2e:dev
 yarn frontend:build
 yarn frontend:test:e2e
 ```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-yarn frontend:lint
-```
